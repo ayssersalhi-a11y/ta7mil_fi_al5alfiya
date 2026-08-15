@@ -21,7 +21,7 @@ jobs:
 
     - name: Download Godot Android Library
       run: |
-        curl -L -o godot-lib.aar "https://downloads.tuxfamily.org/godotengine/4.2.2/godot-lib.4.2.2.stable.release.aar"
+        curl -fL -o godot-lib.aar "https://github.com/godotengine/godot/releases/download/4.2.2-stable/godot-lib.4.2.2.stable.release.aar"
 
     - name: Setup Gradle
       uses: gradle/actions/setup-gradle@v3
