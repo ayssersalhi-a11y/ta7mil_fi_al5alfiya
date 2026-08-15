@@ -1,0 +1,9 @@
+[config]
+name="GodotUploader"
+binary_type="local"
+binary="godot-uploader-release.aar"
+
+[dependencies]
+local=[]
+remote=["androidx.work:work-runtime:2.9.0"]
+custom_maven_repos=[]
