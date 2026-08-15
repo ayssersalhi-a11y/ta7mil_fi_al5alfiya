@@ -1,0 +1,24 @@
+plugins {
+    id 'com.android.library'
+}
+
+android {
+    namespace 'com.example.godotuploader'
+    compileSdk 34
+
+    defaultConfig {
+        minSdk 21
+        targetSdk 34
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+}
+
+dependencies {
+    // مكتبة جودوت ومكتبة WorkManager الخاصة بأندرويد
+    compileOnly files('godot-lib.aar')
+    implementation 'androidx.work:work-runtime:2.9.0'
+}
