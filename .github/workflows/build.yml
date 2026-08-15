@@ -1,0 +1,42 @@
+name: Build Godot Android Plugin
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    - name: Set up JDK 17
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'temurin'
+        java-version: '17'
+
+    - name: Download Godot Android Library
+      run: |
+        curl -L -o godot-lib.aar "https://downloads.tuxfamily.org/godotengine/4.2.2/godot-lib.4.2.2.stable.release.aar"
+
+    - name: Setup Gradle
+      uses: gradle/actions/setup-gradle@v3
+
+    - name: Build AAR with Gradle
+      run: gradle assembleRelease
+
+    - name: Prepare Artifacts
+      run: |
+        mkdir -p output/
+        cp build/outputs/aar/*-release.aar output/godot-uploader-release.aar
+        cp godot-uploader.gdap output/
+
+    - name: Upload Plugin Artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: GodotUploader-Plugin
+        path: output/
